@@ -20,13 +20,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/Celestial_1.19.4.fabric.test.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/Celestial_1.19.4.fabric.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/Celestial_1.19.4.forge.main.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/Celestial_1.19.4.forge.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/Celestial_1.19.4.forge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/Celestial_1.19.4.forge.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/celestial1.19.4.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/celestial1.19.4.common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/celestial1.19.4.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/celestial1.19.4.common.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/celestial1.19.4.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/celestial1.19.4.common.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/celestial1.19.4.fabric.main.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/celestial1.19.4.fabric.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/celestial1.19.4.fabric.test.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/celestial1.19.4.fabric.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/celestial1.19.4.forge.main.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/celestial1.19.4.forge.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/celestial1.19.4.forge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/celestial1.19.4.forge.test.iml" />
     </modules>
   </component>
 </project>
