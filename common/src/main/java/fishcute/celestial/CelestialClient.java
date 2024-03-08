@@ -1,12 +1,15 @@
 package fishcute.celestial;
 
+import fishcute.celestialmain.util.ClientTick;
 import fishcute.celestialmain.util.Util;
-import net.fabricmc.api.ClientModInitializer;
 
-public class CelestialClient implements ClientModInitializer {
+public class CelestialClient {
 
-    @Override
     public void onInitializeClient() {
         Util.log("Loading Celestial");
+    }
+
+    public static void onReloadKey() {
+        ClientTick.onReloadKey();
     }
 }

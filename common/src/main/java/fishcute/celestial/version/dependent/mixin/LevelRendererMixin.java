@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexBuffer;
 import fishcute.celestial.version.dependent.util.*;
+import fishcute.celestialmain.api.minecraft.wrappers.*;
 import fishcute.celestialmain.sky.CelestialSky;
 import fishcute.celestialmain.version.independent.VersionLevelRenderer;
 import net.minecraft.client.Camera;
@@ -30,27 +31,20 @@ public class LevelRendererMixin {
     private BufferBuilder.RenderedBuffer drawStars(BufferBuilder buffer) {
         return null;
     }
-
-    private PoseStackWrapper poseStackWrapper = new PoseStackWrapper(null);
-    private Matrix4fWrapper matrix4fWrapper = new Matrix4fWrapper(null);
-    private CameraWrapper cameraWrapper = new CameraWrapper(null);
-    private VertexBufferWrapper skyBufferWrapper = new VertexBufferWrapper(null);
-    private VertexBufferWrapper darkBufferWrapper = new VertexBufferWrapper(null);
-    private LevelWrapper levelWrapper = new LevelWrapper(null);
     @Inject(method = "renderSky", at = @At("HEAD"), cancellable = true)
     private void renderSky(PoseStack matrices, Matrix4f projectionMatrix, float tickDelta, Camera camera, boolean bl, Runnable runnable, CallbackInfo info) {
         if (CelestialSky.doesDimensionHaveCustomSky()) {
             info.cancel();
             runnable.run();
 
-            poseStackWrapper.matrices = matrices;
-            matrix4fWrapper.matrix = projectionMatrix;
-            cameraWrapper.camera = camera;
-            skyBufferWrapper.buffer = skyBuffer;
-            darkBufferWrapper.buffer = darkBuffer;
-            levelWrapper.level = level;
-
-            VersionLevelRenderer.renderLevel(matrix4fWrapper, poseStackWrapper, skyBufferWrapper, darkBufferWrapper, cameraWrapper, levelWrapper, tickDelta);
+            VersionLevelRenderer.renderLevel((IMatrix4fWrapper) projectionMatrix,
+                    (IPoseStackWrapper) matrices,
+                    (IVertexBufferWrapper) skyBuffer,
+                    (IVertexBufferWrapper) darkBuffer,
+                    (ICameraWrapper) camera,
+                    (ILevelWrapper) level,
+                    tickDelta
+            );
         }
     }
 }

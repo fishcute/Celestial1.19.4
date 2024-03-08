@@ -1,10 +1,11 @@
 package fishcute.celestial.version.dependent;
 
+import fishcute.celestialmain.api.minecraft.IMcVector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
-public class Vector {
-    private BlockPos.MutableBlockPos blockPos;
+public class Vector implements IMcVector {
+    private final BlockPos.MutableBlockPos blockPos;
     public static Vector fromVec(Vec3 v) {
         return new Vector(v.x, v.y, v.z);
     }
@@ -21,6 +22,47 @@ public class Vector {
         this.z = z;
         blockPos = new BlockPos.MutableBlockPos(x, y, z);
     }
+
+    @Override
+    public float x() {
+        return (float) this.x;
+    }
+
+    @Override
+    public float y() {
+        return (float) this.y;
+    }
+
+    @Override
+    public float z() {
+        return (float) this.z;
+    }
+
+    @Override
+    public float setX(float v) {
+        this.x = v;
+        return v;
+    }
+
+    @Override
+    public float setY(float v) {
+        this.y = v;
+        return v;
+    }
+
+    @Override
+    public float setZ(float v) {
+        this.z = v;
+        return v;
+    }
+
+    @Override
+    public void set(float x, float y, float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
     public void set(double x, double y, double z) {
         this.x = x;
         this.y = y;

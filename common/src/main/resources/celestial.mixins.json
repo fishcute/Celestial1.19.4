@@ -12,9 +12,21 @@
     "MinecraftMixin",
     "PoseMixin",
     "PoseStackMixin",
-    "ReloadableResourceManagerMixin"
+    "ReloadableResourceManagerMixin",
+    "api.BufferBuilderMixin",
+    "api.CameraMixin",
+    "api.PoseStackMixin",
+    "api.ShaderInstanceWrapper",
+    "api.VertexBufferMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "api.ClientLevelMixin",
+    "api.Matrix3fMixin",
+    "api.Matrix4fMixin",
+    "api.QuaternionMixin",
+    "api.ResourceLocationMixin"
+  ]
 }

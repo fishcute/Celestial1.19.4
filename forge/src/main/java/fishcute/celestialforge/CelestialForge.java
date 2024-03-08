@@ -1,8 +1,8 @@
 package fishcute.celestialforge;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import fishcute.celestialmain.util.ClientTick;
-import fishcute.celestialmain.util.Util;
+import fishcute.celestial.CelestialClient;
+import fishcute.celestial.version.dependent.VInstances;
 import net.minecraft.client.KeyMapping;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -11,9 +11,6 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod("celestial")
 public class CelestialForge {
-    public CelestialForge() {
-        Util.log("Loading Celestial Forge");
-    }
 
     private static KeyMapping reloadSky = new KeyMapping(
             "key.reload_sky",
@@ -30,8 +27,12 @@ public class CelestialForge {
     public void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
             while (reloadSky.consumeClick()) {
-                ClientTick.onReloadKey();
+                CelestialClient.onReloadKey();
             }
         }
+    }
+
+    public CelestialForge() {
+        VInstances.setInstances();
     }
 }

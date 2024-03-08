@@ -4,65 +4,69 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.VertexBuffer;
 import fishcute.celestial.version.dependent.util.ResourceLocationWrapper;
+import fishcute.celestialmain.api.minecraft.IRenderSystem;
+import fishcute.celestialmain.api.minecraft.wrappers.IResourceLocationWrapper;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 
-public class VRenderSystem {
-    public static void setShaderFogStart(float start) {
+public class VRenderSystem implements IRenderSystem {
+    public void setShaderFogStart(float start) {
         RenderSystem.setShaderFogStart(start);
     }
-    public static void setShaderFogEnd(float end) {
+    public void setShaderFogEnd(float end) {
         RenderSystem.setShaderFogEnd(end);
     }
-    public static int getBiomeFogColor(Biome biome) {
+    public int getBiomeFogColor(Biome biome) {
         return biome.getSpecialEffects().getFogColor();
     }
-    public static void levelFogColor() {
+    public void levelFogColor() {
         FogRenderer.levelFogColor();
     }
-    public static void setupNoFog() {
+    public void setupNoFog() {
         FogRenderer.setupNoFog();
     }
-    public static void defaultBlendFunc() {
+    public void defaultBlendFunc() {
         RenderSystem.defaultBlendFunc();
     }
 
-    public static void depthMask(boolean enable) {
+    public void depthMask(boolean enable) {
         RenderSystem.depthMask(enable);
     }
-    public static void setShaderColor(float f, float g, float h, float a) {
+    public void setShaderColor(float f, float g, float h, float a) {
         RenderSystem.setShaderColor(f, g, h, a);
     }
-    public static void clearColor(float f, float g, float h, float a) {
+    public void clearColor(float f, float g, float h, float a) {
         RenderSystem.clearColor(f, g, h, a);
     }
-    public static void unbindVertexBuffer() {
+    public void unbindVertexBuffer() {
         VertexBuffer.unbind();
     }
-    public static void toggleBlend(boolean enable) {
+    public void toggleBlend(boolean enable) {
         if (enable)
             RenderSystem.enableBlend();
         else
             RenderSystem.disableBlend();
     }
-    public static void defaultBlendFunction() {
+    public void defaultBlendFunction() {
         RenderSystem.defaultBlendFunc();
     }
-    public static void setShaderPositionColor() {
+    public void setShaderPositionColor() {
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
     }
-    public static void setShaderPositionTex() {
+    public void setShaderPositionTex() {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
     }
 
-    public static void toggleTexture(boolean texture) {
+    public void toggleTexture(boolean texture) {
         // Apparently unused in 1.19.4+
     }
-    public static void blendFuncSeparate() {
+    public void blendFuncSeparate() {
         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
     }
-    public static void setShaderTexture(int i, ResourceLocationWrapper j) {
-        RenderSystem.setShaderTexture(i, j.resourceLocation);
+
+    public void setShaderTexture(int i, IResourceLocationWrapper j) {
+        RenderSystem.setShaderTexture(i, (ResourceLocation) j);
     }
 }

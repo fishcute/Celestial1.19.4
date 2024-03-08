@@ -52,7 +52,7 @@ dependencies {
 
     shadowCommon "org.jetbrains.kotlin:${rootProject.kotlin}"
     shadowCommon "celestialexpressions:celestialexpressions:${rootProject.celestial_expressions_version}"
-    shadowCommon project(":CelestialMain")
+    implementation project(":CelestialMain")
 }
 
 processResources {

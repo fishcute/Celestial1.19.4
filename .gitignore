@@ -3,3 +3,6 @@ build/
 */.gradle/
 */build/
 */run
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+**/.idea/runConfigurations/
