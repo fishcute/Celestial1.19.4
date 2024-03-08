@@ -23,7 +23,6 @@ subprojects {
         // mappings "net.fabricmc:yarn:1.19.4+build.2:v2"
         implementation "org.jetbrains.kotlin:${rootProject.kotlin}"
         implementation "celestialexpressions:celestialexpressions:${rootProject.celestial_expressions_version}"
-        implementation project(":CelestialMain")
     }
 }
 
