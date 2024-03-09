@@ -5,5 +5,5 @@ import net.minecraft.client.renderer.ShaderInstance;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ShaderInstance.class)
-public class ShaderInstanceWrapper implements IShaderInstanceWrapper {
+public class ShaderInstanceMixin implements IShaderInstanceWrapper {
 }

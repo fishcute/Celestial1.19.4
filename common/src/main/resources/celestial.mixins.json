@@ -16,7 +16,7 @@
     "api.BufferBuilderMixin",
     "api.CameraMixin",
     "api.PoseStackMixin",
-    "api.ShaderInstanceWrapper",
+    "api.ShaderInstanceMixin",
     "api.VertexBufferMixin"
   ],
   "injectors": {

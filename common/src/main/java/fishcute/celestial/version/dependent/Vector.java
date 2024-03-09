@@ -41,18 +41,21 @@ public class Vector implements IMcVector {
     @Override
     public float setX(float v) {
         this.x = v;
+        this.blockPos.set(v, y, z);
         return v;
     }
 
     @Override
     public float setY(float v) {
         this.y = v;
+        this.blockPos.set(x, v, z);
         return v;
     }
 
     @Override
     public float setZ(float v) {
         this.z = v;
+        this.blockPos.set(x, y, v);
         return v;
     }
 
@@ -61,6 +64,7 @@ public class Vector implements IMcVector {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.blockPos.set(x, y, z);
     }
 
     public void set(double x, double y, double z) {
