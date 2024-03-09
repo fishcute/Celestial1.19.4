@@ -3,7 +3,6 @@ package fishcute.celestial.version.dependent;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.VertexBuffer;
-import fishcute.celestial.version.dependent.util.ResourceLocationWrapper;
 import fishcute.celestialmain.api.minecraft.IRenderSystem;
 import fishcute.celestialmain.api.minecraft.wrappers.IResourceLocationWrapper;
 import net.minecraft.client.renderer.FogRenderer;
