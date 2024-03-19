@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.BufferUploader;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import fishcute.celestialmain.api.minecraft.wrappers.IBufferBuilderWrapper;
-import fishcute.celestialmain.api.minecraft.wrappers.IMatrix4fWrapper;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -30,13 +29,13 @@ public class BufferBuilderMixin implements IBufferBuilderWrapper {
     }
 
     @Override
-    public void celestial$vertex(IMatrix4fWrapper matrix4f, float x, float y, float z, float r, float g, float b, float a) {
+    public void celestial$vertex(Object matrix4f, float x, float y, float z, float r, float g, float b, float a) {
         var self = (BufferBuilder)(Object) this;
         self.vertex((Matrix4f) matrix4f, x, y, z).color(r, g, b, a).endVertex();
     }
 
     @Override
-    public void celestial$vertexUv(IMatrix4fWrapper matrix4f, float x, float y, float z, float u, float v, float r, float g, float b, float a) {
+    public void celestial$vertexUv(Object matrix4f, float x, float y, float z, float u, float v, float r, float g, float b, float a) {
         var self = (BufferBuilder)(Object) this;
         self.vertex((Matrix4f) matrix4f, x, y, z).uv(u, v).color(r, g, b, a).endVertex();
     }

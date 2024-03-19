@@ -3,9 +3,6 @@ package fishcute.celestial.version.dependent.mixin.api;
 import com.mojang.blaze3d.vertex.PoseStack;
 import fishcute.celestial.version.dependent.VMath;
 import fishcute.celestial.version.dependent.mixin.PoseMixin;
-import fishcute.celestialmain.api.minecraft.wrappers.IQuaternionWrapper;
-import fishcute.celestialmain.api.minecraft.wrappers.IMatrix3fWrapper;
-import fishcute.celestialmain.api.minecraft.wrappers.IMatrix4fWrapper;
 import fishcute.celestialmain.api.minecraft.wrappers.IPoseStackWrapper;
 import org.joml.*;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,9 +12,9 @@ import org.spongepowered.asm.mixin.Unique;
 public class PoseStackMixin implements IPoseStackWrapper {
 
     @Override
-    public IMatrix4fWrapper celestial$lastPose() {
+    public Object celestial$lastPose() {
         var self = ((PoseStack)(Object) this);
-        return (IMatrix4fWrapper) self.last().pose();
+        return (Object) self.last().pose();
     }
 
     @Override
@@ -55,26 +52,26 @@ public class PoseStackMixin implements IPoseStackWrapper {
         switch (a) {
             case X:
                 VMath.matrix3fSetAxisAngle(celestial$int3, celestial$XN, rot);
-                this.celestial$mulPose((IMatrix3fWrapper) celestial$int3, (IMatrix4fWrapper) celestial$int4);
+                this.celestial$mulPose((Object) celestial$int3, (Object) celestial$int4);
                 break;
             case Y:
                 VMath.matrix3fSetAxisAngle(celestial$int3, celestial$YN, rot);
-                this.celestial$mulPose((IMatrix3fWrapper) celestial$int3, (IMatrix4fWrapper) celestial$int4);
+                this.celestial$mulPose((Object) celestial$int3, (Object) celestial$int4);
                 break;
             case Z:
                 VMath.matrix3fSetAxisAngle(celestial$int3, celestial$ZN, rot);
-                this.celestial$mulPose((IMatrix3fWrapper) celestial$int3, (IMatrix4fWrapper) celestial$int4);
+                this.celestial$mulPose((Object) celestial$int3, (Object) celestial$int4);
                 break;
         }
     }
 
     @Override
-    public void celestial$mulPose(IQuaternionWrapper quaternion) {
-        this.celestial$mulPose(quaternion, (IMatrix4fWrapper) celestial$int4, (IMatrix3fWrapper) celestial$int3);
+    public void celestial$mulPose(Object quaternion) {
+        this.celestial$mulPose(quaternion, (Object) celestial$int4, (Object) celestial$int3);
     }
 
     @Override
-    public void celestial$mulPose(IQuaternionWrapper quaternion, IMatrix4fWrapper intermediate4, IMatrix3fWrapper intermediate3) {
+    public void celestial$mulPose(Object quaternion, Object intermediate4, Object intermediate3) {
         PoseStack.Pose pose = ((PoseStack)(Object) this).last();
         VMath.matrix3fCopyQuaternion(((Matrix3f) intermediate3), quaternion);
         VMath.matrix4fCopyMatrix3f(((Matrix4f) intermediate4), (Matrix3f) intermediate3);
@@ -84,7 +81,7 @@ public class PoseStackMixin implements IPoseStackWrapper {
     }
 
     @Override
-    public void celestial$mulPose(IMatrix3fWrapper matrix3f, IMatrix4fWrapper intermediate4) {
+    public void celestial$mulPose(Object matrix3f, Object intermediate4) {
         var self = ((PoseStack)(Object) this);
         PoseStack.Pose pose = self.last();
         VMath.matrix4fCopyMatrix3f(((Matrix4f) intermediate4), (Matrix3f) matrix3f);
@@ -93,7 +90,7 @@ public class PoseStackMixin implements IPoseStackWrapper {
     }
 
     @Override
-    public IMatrix4fWrapper celestial$rotate(float i, float j, float k) {
+    public Object celestial$rotate(float i, float j, float k) {
         this.celestial$pushPose();
 
         if (i != 0) {
@@ -106,14 +103,14 @@ public class PoseStackMixin implements IPoseStackWrapper {
             this.celestial$mulPose(Axis.Z, k);
         }
 
-        IMatrix4fWrapper matrix4f = this.celestial$lastPose();
+        Object matrix4f = this.celestial$lastPose();
         this.celestial$popPose();
 
         return matrix4f;
     }
 
     @Override
-    public IMatrix4fWrapper celestial$rotateThenTranslate(float i, float j, float k, float x, float y, float z) {
+    public Object celestial$rotateThenTranslate(float i, float j, float k, float x, float y, float z) {
         this.celestial$pushPose();
 
         if (i != 0) {
@@ -128,14 +125,14 @@ public class PoseStackMixin implements IPoseStackWrapper {
 
         this.celestial$translate(x, y, z);
 
-        IMatrix4fWrapper matrix4f = this.celestial$lastPose();
+        Object matrix4f = this.celestial$lastPose();
         this.celestial$popPose();
 
         return matrix4f;
     }
 
     @Override
-    public IMatrix4fWrapper celestial$translateThenRotate(float i, float j, float k, float x, float y, float z) {
+    public Object celestial$translateThenRotate(float i, float j, float k, float x, float y, float z) {
         this.celestial$pushPose();
 
         this.celestial$translate(x, y, z);
@@ -150,7 +147,7 @@ public class PoseStackMixin implements IPoseStackWrapper {
             this.celestial$mulPose(Axis.Z, k);
         }
 
-        IMatrix4fWrapper matrix4f = this.celestial$lastPose();
+        Object matrix4f = this.celestial$lastPose();
         this.celestial$popPose();
 
         return matrix4f;

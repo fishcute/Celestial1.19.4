@@ -36,7 +36,7 @@ public class LevelRendererMixin {
             info.cancel();
             runnable.run();
 
-            VersionLevelRenderer.renderLevel((IMatrix4fWrapper) projectionMatrix,
+            VersionLevelRenderer.renderLevel((Object) projectionMatrix,
                     (IPoseStackWrapper) matrices,
                     (IVertexBufferWrapper) skyBuffer,
                     (IVertexBufferWrapper) darkBuffer,

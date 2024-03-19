@@ -47,12 +47,12 @@ repositories {
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+    common(project(path: ":common", configuration: "namedElements")) {transitive false}
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) {transitive = false}
 
     shadowCommon "org.jetbrains.kotlin:${rootProject.kotlin}"
     shadowCommon "celestialexpressions:celestialexpressions:${rootProject.celestial_expressions_version}"
-    implementation project(":CelestialMain")
+    shadowCommon(implementation(project(":CelestialMain")))
 }
 
 processResources {

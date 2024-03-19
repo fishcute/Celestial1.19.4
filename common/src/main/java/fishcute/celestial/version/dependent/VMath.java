@@ -1,6 +1,5 @@
 package fishcute.celestial.version.dependent;
 
-import fishcute.celestialmain.api.minecraft.wrappers.IQuaternionWrapper;
 import net.minecraft.util.Mth;
 import org.apache.commons.math3.complex.Quaternion;
 import org.joml.Matrix3f;
@@ -14,8 +13,8 @@ public class VMath {
     public static float cos(float o) {
         return Mth.cos(o);
     }
-    public static void matrix3fCopyQuaternion(Matrix3f matrix3f, IQuaternionWrapper quaternion) {
-        var quat = (Quaternion)(Object) quaternion;
+    public static void matrix3fCopyQuaternion(Matrix3f matrix3f, Object quaternion) {
+        var quat = (Quaternion) quaternion;
         float f = (float) quat.getQ0();
         float g = (float) quat.getQ1();
         float h = (float) quat.getQ2();

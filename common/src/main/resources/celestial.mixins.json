@@ -24,9 +24,6 @@
   },
   "mixins": [
     "api.ClientLevelMixin",
-    "api.Matrix3fMixin",
-    "api.Matrix4fMixin",
-    "api.QuaternionMixin",
     "api.ResourceLocationMixin"
   ]
 }

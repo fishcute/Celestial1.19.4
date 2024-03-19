@@ -46,7 +46,7 @@ dependencies {
 
     // shadowCommon "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     shadowCommon "celestialexpressions:celestialexpressions:${rootProject.celestial_expressions_version}"
-    implementation project(":CelestialMain")
+    shadowCommon(implementation(project(":CelestialMain")))
 }
 
 processResources {
