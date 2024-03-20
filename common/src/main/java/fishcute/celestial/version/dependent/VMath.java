@@ -1,9 +1,9 @@
 package fishcute.celestial.version.dependent;
 
 import net.minecraft.util.Mth;
-import org.apache.commons.math3.complex.Quaternion;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class VMath {
@@ -14,11 +14,11 @@ public class VMath {
         return Mth.cos(o);
     }
     public static void matrix3fCopyQuaternion(Matrix3f matrix3f, Object quaternion) {
-        var quat = (Quaternion) quaternion;
-        float f = (float) quat.getQ0();
-        float g = (float) quat.getQ1();
-        float h = (float) quat.getQ2();
-        float i = (float) quat.getQ3();
+        var quat = (Quaternionf) quaternion;
+        float f = quat.w;
+        float g = quat.x;
+        float h = quat.y;
+        float i = quat.z;
         float j = 2.0F * f * f;
         float k = 2.0F * g * g;
         float l = 2.0F * h * h;
@@ -67,11 +67,11 @@ public class VMath {
         matrix3f.m12(2.0F * (n - p));
     }
 
-    public static void matrix4fCopyQuaternion(Matrix4f matrix4f, Quaternion quaternion) {
-        float f = (float) quaternion.getQ0();
-        float g = (float) quaternion.getQ1();
-        float h = (float) quaternion.getQ2();
-        float i = (float) quaternion.getQ3();
+    public static void matrix4fCopyQuaternion(Matrix4f matrix4f, Quaternionf quaternion) {
+        float f = quaternion.w;
+        float g = quaternion.x;
+        float h = quaternion.y;
+        float i = quaternion.z;
         float j = 2.0F * f * f;
         float k = 2.0F * g * g;
         float l = 2.0F * h * h;
