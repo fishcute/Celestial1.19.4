@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
-    @Inject(method = "tick", at = @At("HEAD"))
+    @Inject(method = "runTick", at = @At("HEAD"))
     private void tick(CallbackInfo info) {
         ClientTick.onTick();
     }

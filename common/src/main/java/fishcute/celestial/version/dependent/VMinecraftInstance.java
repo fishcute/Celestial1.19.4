@@ -40,7 +40,7 @@ public class VMinecraftInstance implements IMinecraftInstance {
         return minecraft.level.dimension().location().getPath();
     }
     public float getTickDelta() {
-        return minecraft.getDeltaFrameTime();
+        return minecraft.getFrameTime();
     }
     public Vector getPlayerEyePosition() {
         return Vector.fromVec(minecraft.player.getEyePosition(getTickDelta()));

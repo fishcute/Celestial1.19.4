@@ -1,5 +1,6 @@
 package fishcute.celestial.version.dependent.mixin;
 
+import fishcute.celestial.version.dependent.VMinecraftInstance;
 import fishcute.celestialmain.version.independent.VersionSky;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import org.spongepowered.asm.mixin.Mixin;
