@@ -19,7 +19,7 @@ public class BufferBuilderMixin implements IBufferBuilderWrapper {
     @Override
     public void celestial$beginObject() {
         var self = (BufferBuilder)(Object) this;
-        self.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        self.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
     }
 
     @Override

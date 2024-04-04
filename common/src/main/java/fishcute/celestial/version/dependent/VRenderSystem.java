@@ -55,7 +55,7 @@ public class VRenderSystem implements IRenderSystem {
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
     }
     public void setShaderPositionTex() {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
     }
 
     public void toggleTexture(boolean texture) {
