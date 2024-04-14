@@ -22,7 +22,7 @@ public class FogRendererMixin {
     @Inject(method = "setupFog", at = @At("RETURN"))
     private static void setupFog(Camera camera, FogRenderer.FogMode fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo info) {
         VersionSky.setupFogStartEnd(fogType == FogRenderer.FogMode.FOG_SKY, viewDistance, thickFog);
-        VersionSky.setupFog(tickDelta);
+        VersionSky.setupFog();
     }
 
     @Shadow

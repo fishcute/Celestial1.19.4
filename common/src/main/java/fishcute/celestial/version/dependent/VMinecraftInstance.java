@@ -218,17 +218,17 @@ public class VMinecraftInstance implements IMinecraftInstance {
     public boolean isCameraInWater() {
         return minecraft.gameRenderer.getMainCamera().getFluidInCamera() == FogType.WATER;
     }
-    public double getNightVisionModifier(float tickDelta) {
+    public double getNightVisionModifier() {
         if (!doesPlayerExist() || !minecraft.player.hasEffect(MobEffects.NIGHT_VISION))
             return 0;
-        return GameRenderer.getNightVisionScale(minecraft.player, tickDelta);
+        return GameRenderer.getNightVisionScale(minecraft.player, getTickDelta());
     }
     public boolean isSneaking() {
         return minecraft.player.isShiftKeyDown();
     }
 
-    public float getDarknessFogEffect(float fogStart, float tickDelta) {
-        return Mth.lerp((minecraft.player.getEffect(MobEffects.DARKNESS).getFactorData().get()).getFactor(minecraft.player, tickDelta), fogStart, 15.0F);
+    public float getDarknessFogEffect(float fogStart) {
+        return Mth.lerp((minecraft.player.getEffect(MobEffects.DARKNESS).getFactorData().get()).getFactor(minecraft.player, getTickDelta()), fogStart, 15.0F);
     }
     public boolean hasDarkness() {
         return minecraft.player.hasEffect(MobEffects.DARKNESS);
