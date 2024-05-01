@@ -10,17 +10,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.CubicSampler;
-import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 import oshi.util.tuples.Pair;
 
 import java.io.IOException;
@@ -48,7 +47,7 @@ public class VMinecraftInstance implements IMinecraftInstance {
 
     public void sendFormattedErrorMessage(String error, String type, String location) {
         minecraft.player.displayClientMessage(
-                Component.literal(ChatFormatting.DARK_RED +
+                Component.nullToEmpty(ChatFormatting.DARK_RED +
                 "[Celestial] " + type +
                         ChatFormatting.GRAY + " at " +
                         ChatFormatting.YELLOW + location +
@@ -57,30 +56,30 @@ public class VMinecraftInstance implements IMinecraftInstance {
                 ), false);
     }
     public void sendInfoMessage(String i) {
-        minecraft.player.displayClientMessage(Component.literal(
+        minecraft.player.displayClientMessage(Component.nullToEmpty(
                 ChatFormatting.DARK_AQUA + "[Celestial] " +
                 ChatFormatting.AQUA + i), false);
     }
     public void sendErrorMessage(String i) {
         minecraft.player.displayClientMessage(
-                Component.literal(ChatFormatting.DARK_RED +
+                Component.nullToEmpty(ChatFormatting.DARK_RED +
                         "[Celestial] " +
                         ChatFormatting.RED + i
                 ), false);
     }
     public void sendRedMessage(String i) {
         minecraft.player.displayClientMessage(
-                Component.literal(ChatFormatting.RED + i
+                Component.nullToEmpty(ChatFormatting.RED + i
                 ), false);
     }
     public InputStream getResource(String path) throws IOException {
-        return minecraft.getResourceManager().getResource(new ResourceLocation(path)).get().open();
+        return minecraft.getResourceManager().getResource(new ResourceLocation(path)).getInputStream();
     }
     public boolean isGamePaused() {
         return minecraft.isPaused();
     }
     public void sendMessage(String text, boolean actionBar) {
-        minecraft.player.displayClientMessage(Component.literal(text), actionBar);
+        minecraft.player.displayClientMessage(Component.nullToEmpty(text), actionBar);
     }
     public double getPlayerX() {
         return minecraft.player.getX();
@@ -150,7 +149,7 @@ public class VMinecraftInstance implements IMinecraftInstance {
         return minecraft.level.getBiome(getPlayerBlockPosition()).value().getBaseTemperature();
     }
     public float getBiomeDownfall() {
-        return minecraft.level.getBiome(getPlayerBlockPosition()).value().hasPrecipitation() ? 1 : 0;
+        return minecraft.level.getBiome(getPlayerBlockPosition()).value().getDownfall() > 0 ? 1 : 0;
     }
     public boolean getBiomeSnow() {
         return minecraft.level.getBiome(getPlayerBlockPosition()).value().coldEnoughToSnow(getPlayerBlockPosition());
@@ -162,7 +161,7 @@ public class VMinecraftInstance implements IMinecraftInstance {
         return minecraft.mouseHandler.isLeftPressed();
     }
     public IResourceLocationWrapper getMainHandItemKey() {
-        return (IResourceLocationWrapper) BuiltInRegistries.ITEM.getKey(minecraft.player.getMainHandItem().getItem());
+        return (IResourceLocationWrapper) Registry.ITEM.getKey(minecraft.player.getMainHandItem().getItem());
     }
     public String getMainHandItemNamespace() {
         return ((ResourceLocation) getMainHandItemKey()).getNamespace();
@@ -228,9 +227,11 @@ public class VMinecraftInstance implements IMinecraftInstance {
     }
 
     public float getDarknessFogEffect(float fogStart) {
-        return Mth.lerp((minecraft.player.getEffect(MobEffects.DARKNESS).getFactorData().get()).getFactor(minecraft.player, getTickDelta()), fogStart, 15.0F);
+        // Darkness does not exist in 1.18
+        return 0;
     }
     public boolean hasDarkness() {
-        return minecraft.player.hasEffect(MobEffects.DARKNESS);
+        // Darkness does not exist in 1.18
+        return false;
     }
 }

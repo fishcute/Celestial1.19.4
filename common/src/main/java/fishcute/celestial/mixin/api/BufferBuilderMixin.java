@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.BufferUploader;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import fishcute.celestialmain.api.minecraft.wrappers.IBufferBuilderWrapper;
-import org.joml.Matrix4f;
+import com.mojang.math.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(BufferBuilder.class)
@@ -13,7 +13,7 @@ public class BufferBuilderMixin implements IBufferBuilderWrapper {
     @Override
     public void celestial$beginTriangleFan() {
         var self = (BufferBuilder)(Object) this;
-        self.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);;
+        self.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
     }
 
     @Override
@@ -43,7 +43,8 @@ public class BufferBuilderMixin implements IBufferBuilderWrapper {
     @Override
     public void celestial$upload() {
         var self = (BufferBuilder)(Object) this;
-        BufferUploader.drawWithShader(self.end());
+        self.end();
+        BufferUploader.end(self);
     }
 
 //    @Override
