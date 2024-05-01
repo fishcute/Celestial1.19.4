@@ -1,8 +1,8 @@
-package fishcute.celestial.version.dependent.mixin.api;
+package fishcute.celestial.mixin.api;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import fishcute.celestial.version.dependent.VMath;
-import fishcute.celestial.version.dependent.mixin.PoseMixin;
+import fishcute.celestial.VMath;
+import fishcute.celestial.mixin.PoseMixin;
 import fishcute.celestialmain.api.minecraft.wrappers.IPoseStackWrapper;
 import org.joml.*;
 import org.spongepowered.asm.mixin.Mixin;

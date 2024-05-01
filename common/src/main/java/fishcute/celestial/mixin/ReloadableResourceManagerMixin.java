@@ -1,4 +1,4 @@
-package fishcute.celestial.version.dependent.mixin;
+package fishcute.celestial.mixin;
 
 import fishcute.celestialmain.util.ClientTick;
 import net.minecraft.server.packs.PackResources;

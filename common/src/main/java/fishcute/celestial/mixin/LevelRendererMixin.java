@@ -1,12 +1,10 @@
-package fishcute.celestial.version.dependent.mixin;
+package fishcute.celestial.mixin;
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexBuffer;
-import fishcute.celestial.version.dependent.VMinecraftInstance;
 import fishcute.celestialmain.api.minecraft.wrappers.*;
 import fishcute.celestialmain.sky.CelestialSky;
-import fishcute.celestialmain.util.ClientTick;
 import fishcute.celestialmain.version.independent.VersionLevelRenderer;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -44,7 +42,8 @@ public class LevelRendererMixin {
                     (IVertexBufferWrapper) darkBuffer,
                     (ICameraWrapper) camera,
                     (ILevelWrapper) level,
-                    tickDelta
+                    tickDelta,
+                    null // Not required for 1.19
             );
         }
     }

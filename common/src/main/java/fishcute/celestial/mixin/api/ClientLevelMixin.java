@@ -1,6 +1,6 @@
-package fishcute.celestial.version.dependent.mixin.api;
+package fishcute.celestial.mixin.api;
 
-import fishcute.celestial.version.dependent.Vector;
+import fishcute.celestial.Vector;
 import fishcute.celestialmain.api.minecraft.IMcVector;
 import fishcute.celestialmain.api.minecraft.wrappers.ILevelWrapper;
 import net.minecraft.client.Minecraft;

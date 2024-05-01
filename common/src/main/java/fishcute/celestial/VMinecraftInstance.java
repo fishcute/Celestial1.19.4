@@ -1,4 +1,4 @@
-package fishcute.celestial.version.dependent;
+package fishcute.celestial;
 
 
 import fishcute.celestialmain.api.minecraft.IMcVector;
