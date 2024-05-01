@@ -44,7 +44,7 @@ dependencies {
 
     shadowCommon "org.jetbrains.kotlin:${rootProject.kotlin}" //TODO: Use Kotlin for Forge instead
     shadowCommon project(":CelestialExpressions")
-    shadowCommon(implementation(project(":CelestialMain")))
+    common(shadowCommon(implementation(project(":CelestialMain"))))
 }
 
 processResources {
