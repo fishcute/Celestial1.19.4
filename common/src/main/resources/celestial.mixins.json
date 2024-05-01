@@ -17,9 +17,7 @@
     "api.CameraMixin",
     "api.PoseStackMixin",
     "api.ShaderInstanceMixin",
-    "api.VertexBufferMixin",
-    "Matrix3fMixin",
-    "Matrix4fMixin"
+    "api.VertexBufferMixin"
   ],
   "injectors": {
     "defaultRequire": 1

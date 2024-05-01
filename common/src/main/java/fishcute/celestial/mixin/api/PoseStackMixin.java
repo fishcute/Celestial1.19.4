@@ -1,14 +1,10 @@
 package fishcute.celestial.mixin.api;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
 import fishcute.celestial.VMath;
-import fishcute.celestial.access.AccessibleMatrix3f;
-import fishcute.celestial.access.AccessibleMatrix4f;
 import fishcute.celestial.mixin.PoseMixin;
 import fishcute.celestialmain.api.minecraft.wrappers.IPoseStackWrapper;
+import org.joml.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
@@ -17,25 +13,25 @@ public class PoseStackMixin implements IPoseStackWrapper {
 
     @Override
     public Object celestial$lastPose() {
-        PoseStack self = ((PoseStack)(Object) this);
-        return self.last().pose();
+        var self = ((PoseStack)(Object) this);
+        return (Object) self.last().pose();
     }
 
     @Override
     public void celestial$pushPose() {
-        PoseStack self = ((PoseStack)(Object) this);
+        var self = ((PoseStack)(Object) this);
         self.pushPose();
     }
 
     @Override
     public void celestial$popPose() {
-        PoseStack self = ((PoseStack)(Object) this);
+        var self = ((PoseStack)(Object) this);
         self.popPose();
     }
 
     @Override
     public void celestial$translate(double x, double y, double z) {
-        PoseStack self = ((PoseStack)(Object) this);
+        var self = ((PoseStack)(Object) this);
         self.translate((float) x, (float) y, (float) z);
     }
 
@@ -45,25 +41,25 @@ public class PoseStackMixin implements IPoseStackWrapper {
     private final static Matrix3f celestial$int3 = new Matrix3f();
 
     @Unique
-    private static final Vector3f celestial$XN = new Vector3f(1.0F, 0.0F, 0.0F);
+    private static final Vector3f celestial$XN = new Vector3f(-1.0F, 0.0F, 0.0F);
     @Unique
-    private static final Vector3f celestial$YN = new Vector3f(0.0F, 1.0F, 0.0F);
+    private static final Vector3f celestial$YN = new Vector3f(0.0F, -1.0F, 0.0F);
     @Unique
-    private static final Vector3f celestial$ZN = new Vector3f(0.0F, 0.0F, 1.0F);
+    private static final Vector3f celestial$ZN = new Vector3f(0.0F, 0.0F, -1.0F);
 
     @Override
     public void celestial$mulPose(Axis a, float rot) {
         switch (a) {
             case X:
-                VMath.matrix3fSetAxisAngle((AccessibleMatrix3f)(Object) celestial$int3, celestial$XN, rot);
+                VMath.matrix3fSetAxisAngle(celestial$int3, celestial$XN, rot);
                 this.celestial$mulPose((Object) celestial$int3, (Object) celestial$int4);
                 break;
             case Y:
-                VMath.matrix3fSetAxisAngle((AccessibleMatrix3f)(Object) celestial$int3, celestial$YN, rot);
+                VMath.matrix3fSetAxisAngle(celestial$int3, celestial$YN, rot);
                 this.celestial$mulPose((Object) celestial$int3, (Object) celestial$int4);
                 break;
             case Z:
-                VMath.matrix3fSetAxisAngle((AccessibleMatrix3f)(Object) celestial$int3, celestial$ZN, rot);
+                VMath.matrix3fSetAxisAngle(celestial$int3, celestial$ZN, rot);
                 this.celestial$mulPose((Object) celestial$int3, (Object) celestial$int4);
                 break;
         }
@@ -77,20 +73,20 @@ public class PoseStackMixin implements IPoseStackWrapper {
     @Override
     public void celestial$mulPose(Object quaternion, Object intermediate4, Object intermediate3) {
         PoseStack.Pose pose = ((PoseStack)(Object) this).last();
-        VMath.matrix3fCopyQuaternion(((AccessibleMatrix3f) intermediate3), quaternion);
-        VMath.matrix4fCopyMatrix3f(((AccessibleMatrix4f) intermediate4), (AccessibleMatrix3f) intermediate3);
+        VMath.matrix3fCopyQuaternion(((Matrix3f) intermediate3), quaternion);
+        VMath.matrix4fCopyMatrix3f(((Matrix4f) intermediate4), (Matrix3f) intermediate3);
 
-        ((PoseMixin)(Object) pose).getPose().multiply((Matrix4f) intermediate4);
-        ((PoseMixin)(Object) pose).getNormal().mul((Matrix3f) intermediate3);
+        ((PoseMixin)(Object) pose).getPose().mul((Matrix4fc) intermediate4);
+        ((PoseMixin)(Object) pose).getNormal().mul((Matrix3fc) intermediate3);
     }
 
     @Override
     public void celestial$mulPose(Object matrix3f, Object intermediate4) {
-        PoseStack self = ((PoseStack)(Object) this);
+        var self = ((PoseStack)(Object) this);
         PoseStack.Pose pose = self.last();
-        VMath.matrix4fCopyMatrix3f(((AccessibleMatrix4f) intermediate4), (AccessibleMatrix3f) matrix3f);
-        ((PoseMixin)(Object) pose).getPose().multiply((Matrix4f) intermediate4);
-        ((PoseMixin)(Object) pose).getNormal().mul((Matrix3f) matrix3f);
+        VMath.matrix4fCopyMatrix3f(((Matrix4f) intermediate4), (Matrix3f) matrix3f);
+        ((PoseMixin)(Object) pose).getPose().mul((Matrix4fc) intermediate4);
+        ((PoseMixin)(Object) pose).getNormal().mul((Matrix3fc) matrix3f);
     }
 
     @Override

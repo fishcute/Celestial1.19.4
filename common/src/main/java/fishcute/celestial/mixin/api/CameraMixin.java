@@ -23,7 +23,7 @@ public class CameraMixin implements ICameraWrapper {
         if (!(entity instanceof LivingEntity livingEntity)) {
             return false;
         } else {
-            return livingEntity.hasEffect(MobEffects.BLINDNESS);
+            return livingEntity.hasEffect(MobEffects.BLINDNESS) || livingEntity.hasEffect(MobEffects.DARKNESS);
         }
     }
 }
