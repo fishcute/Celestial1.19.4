@@ -1,4 +1,4 @@
-package fishcute.celestial.version.dependent.mixin.api;
+package fishcute.celestial.mixin.api;
 
 import com.mojang.blaze3d.vertex.VertexBuffer;
 import fishcute.celestialmain.api.minecraft.wrappers.IShaderInstanceWrapper;

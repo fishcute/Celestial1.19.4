@@ -1,4 +1,4 @@
-package fishcute.celestial.version.dependent.mixin;
+package fishcute.celestial.mixin;
 
 import fishcute.celestialmain.version.independent.VersionSky;
 import net.minecraft.client.Camera;

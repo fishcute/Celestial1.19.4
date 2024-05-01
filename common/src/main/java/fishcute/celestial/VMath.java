@@ -1,4 +1,4 @@
-package fishcute.celestial.version.dependent;
+package fishcute.celestial;
 
 import net.minecraft.util.Mth;
 import org.joml.Matrix3f;

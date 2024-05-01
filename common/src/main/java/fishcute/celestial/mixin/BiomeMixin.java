@@ -1,6 +1,6 @@
-package fishcute.celestial.version.dependent.mixin;
+package fishcute.celestial.mixin;
 
-import fishcute.celestial.version.dependent.VRenderSystem;
+import fishcute.celestial.VRenderSystem;
 import fishcute.celestialmain.version.independent.Instances;
 import fishcute.celestialmain.version.independent.VersionSky;
 import net.minecraft.world.level.biome.Biome;

@@ -1,7 +1,6 @@
-package fishcute.celestial.version.dependent.mixin;
+package fishcute.celestial.mixin;
 
-import fishcute.celestial.version.dependent.VMinecraftInstance;
-import fishcute.celestial.version.dependent.Vector;
+import fishcute.celestial.Vector;
 import fishcute.celestialmain.version.independent.VersionSky;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.phys.Vec3;

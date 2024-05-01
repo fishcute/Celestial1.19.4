@@ -1,4 +1,4 @@
-package fishcute.celestial.version.dependent;
+package fishcute.celestial;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.Tesselator;
@@ -45,7 +45,7 @@ public class VInstances {
 
             @Override
             public IMcVector build(float x, float y, float z) {
-            return new fishcute.celestial.version.dependent.Vector(x, y, z);
+            return new fishcute.celestial.Vector(x, y, z);
             }
         }
     }

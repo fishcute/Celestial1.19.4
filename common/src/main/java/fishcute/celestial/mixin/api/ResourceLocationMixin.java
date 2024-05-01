@@ -1,4 +1,4 @@
-package fishcute.celestial.version.dependent.mixin.api;
+package fishcute.celestial.mixin.api;
 
 import fishcute.celestialmain.api.minecraft.wrappers.IResourceLocationWrapper;
 import net.minecraft.resources.ResourceLocation;

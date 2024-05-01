@@ -1,4 +1,4 @@
-package fishcute.celestial.version.dependent;
+package fishcute.celestial;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -67,5 +67,10 @@ public class VRenderSystem implements IRenderSystem {
 
     public void setShaderTexture(int i, IResourceLocationWrapper j) {
         RenderSystem.setShaderTexture(i, (ResourceLocation) j);
+    }
+
+    @Override
+    public void shadeModel(int i) {
+        // Unused in 1.18+
     }
 }
