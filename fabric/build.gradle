@@ -36,7 +36,7 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    // shadowCommon "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    //shadowCommon "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     shadowCommon project(":CelestialExpressions")
     shadowCommon(implementation(project(":CelestialMain")))
 }

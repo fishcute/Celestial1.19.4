@@ -34,6 +34,11 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
+
+    maven {
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
+    }
 }
 
 dependencies {
@@ -42,9 +47,10 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) {transitive false}
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) {transitive = false}
 
-    shadowCommon "org.jetbrains.kotlin:${rootProject.kotlin}" //TODO: Use Kotlin for Forge instead
     shadowCommon project(":CelestialExpressions")
     common(shadowCommon(implementation(project(":CelestialMain"))))
+
+    modImplementation 'thedarkcolour:kotlinforforge:4.10.0'
 }
 
 processResources {
