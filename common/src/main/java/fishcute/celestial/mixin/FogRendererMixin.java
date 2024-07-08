@@ -1,5 +1,10 @@
 package fishcute.celestial.mixin;
 
+import fishcute.celestialmain.sky.CelestialSky;
+import fishcute.celestialmain.sky.objects.ICelestialObject;
+import fishcute.celestialmain.sky.objects.TwilightObject;
+import fishcute.celestialmain.util.Util;
+import fishcute.celestialmain.version.independent.Instances;
 import fishcute.celestialmain.version.independent.VersionSky;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -35,10 +40,26 @@ public class FogRendererMixin {
 
     @Inject(method = "setupColor", at = @At("RETURN"))
     private static void setupColor(Camera camera, float f, ClientLevel clientLevel, int i, float g, CallbackInfo ci) {
-        float[] color = VersionSky.setupFogColor(f);
-        if (color == null) return;
-        fogRed = color[0];
-        fogGreen = color[1];
-        fogBlue = color[2];
+
+
+        float[] color = VersionSky.setupFogColor();
+
+        if (color != null) {
+            fogRed = color[0];
+            fogGreen = color[1];
+            fogBlue = color[2];
+        }
+
+        if (CelestialSky.doesDimensionHaveCustomSky()) {
+            for (ICelestialObject o : CelestialSky.getDimensionRenderInfo().skyObjects) {
+                if (o instanceof TwilightObject t) {
+                    fogRed = (float) Util.lerp(t.fogTwilightColor.x, fogRed, t.fogTwilightColor.w);
+                    fogGreen = (float) Util.lerp(t.fogTwilightColor.y, fogGreen, t.fogTwilightColor.w);
+                    fogBlue = (float) Util.lerp(t.fogTwilightColor.z, fogBlue, t.fogTwilightColor.w);
+                }
+            }
+        }
+
+        Instances.renderSystem.clearColor(fogRed, fogGreen, fogBlue, 0.0F);
     }
 }
