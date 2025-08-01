@@ -13,6 +13,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.CubicSampler;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
@@ -42,6 +43,12 @@ public class VMinecraftInstance implements IMinecraftInstance {
     public float getTickDelta() {
         return minecraft.getFrameTime();
     }
+
+    @Override
+    public long getMillis() {
+        return net.minecraft.Util.getMillis();
+    }
+
     public Vector getPlayerEyePosition() {
         return Vector.fromVec(minecraft.player.getEyePosition(getTickDelta()));
     }
@@ -211,6 +218,31 @@ public class VMinecraftInstance implements IMinecraftInstance {
         return c;
     }
 
+    @Override
+    public double[] getBiomeWaterFogColor() {
+        double[] c = new double[3];
+        Util.getRealFogColor = true;
+        Vec3 vec = CubicSampler.gaussianSampleVec3(minecraft.player.position(), (ix, jx, kx) -> {
+            return Vec3.fromRGB24((minecraft.level.getBiome(new BlockPos(ix, jx, kx)).value()).getWaterFogColor());
+        });
+        Util.getRealFogColor = false;
+        c[0] = vec.x;
+        c[1] = vec.y;
+        c[2] = vec.z;
+        return c;
+    }
+
+    @Override
+    public float getWaterVision() {
+        return minecraft.player.getWaterVision();
+    }
+
+    @Override
+    public boolean doesBiomeHaveCloserFog() {
+        Holder<Biome> holder = minecraft.player.level.getBiome(minecraft.player.blockPosition());
+        return holder.is(BiomeTags.HAS_CLOSER_WATER_FOG);
+    }
+
     public boolean disableFogChanges() {
         return minecraft.gameRenderer.getMainCamera().getFluidInCamera() !=
                 FogType.NONE || minecraft.player.hasEffect(MobEffects.BLINDNESS);
@@ -218,6 +250,22 @@ public class VMinecraftInstance implements IMinecraftInstance {
     public boolean isCameraInWater() {
         return minecraft.gameRenderer.getMainCamera().getFluidInCamera() == FogType.WATER;
     }
+
+    @Override
+    public boolean isCameraInLava() {
+        return minecraft.gameRenderer.getMainCamera().getFluidInCamera() == FogType.LAVA;
+    }
+
+    @Override
+    public boolean isCameraInPowderedSnow() {
+        return minecraft.gameRenderer.getMainCamera().getFluidInCamera() == FogType.POWDER_SNOW;
+    }
+
+    @Override
+    public boolean isCameraBlinded() {
+        return minecraft.player.hasEffect(MobEffects.BLINDNESS);
+    }
+
     public double getNightVisionModifier() {
         if (!doesPlayerExist() || !minecraft.player.hasEffect(MobEffects.NIGHT_VISION))
             return 0;

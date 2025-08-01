@@ -18,11 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FogRenderer.class)
 public class FogRendererMixin {
-
-    @ModifyVariable(method = "setupFog", at = @At("HEAD"), ordinal = 0, argsOnly = true)
-    private static boolean setupFog(boolean thickFog) {
-        return VersionSky.checkThickFog(thickFog);
-    }
     @Inject(method = "setupFog", at = @At("RETURN"))
     private static void setupFog(Camera camera, FogRenderer.FogMode fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo info) {
         VersionSky.setupFogStartEnd(fogType == FogRenderer.FogMode.FOG_SKY, viewDistance, thickFog);
@@ -40,8 +35,6 @@ public class FogRendererMixin {
 
     @Inject(method = "setupColor", at = @At("RETURN"))
     private static void setupColor(Camera camera, float f, ClientLevel clientLevel, int i, float g, CallbackInfo ci) {
-
-
         float[] color = VersionSky.setupFogColor();
 
         if (color != null) {
@@ -50,15 +43,10 @@ public class FogRendererMixin {
             fogBlue = color[2];
         }
 
-        if (CelestialSky.doesDimensionHaveCustomSky()) {
-            for (ICelestialObject o : CelestialSky.getDimensionRenderInfo().skyObjects) {
-                if (o instanceof TwilightObject t) {
-                    fogRed = (float) Util.lerp(t.fogTwilightColor.x, fogRed, t.fogTwilightColor.w);
-                    fogGreen = (float) Util.lerp(t.fogTwilightColor.y, fogGreen, t.fogTwilightColor.w);
-                    fogBlue = (float) Util.lerp(t.fogTwilightColor.z, fogBlue, t.fogTwilightColor.w);
-                }
-            }
-        }
+        color = VersionSky.applyPostFogChanges(fogRed, fogGreen, fogBlue);
+        fogRed = color[0];
+        fogGreen = color[1];
+        fogBlue = color[2];
 
         Instances.renderSystem.clearColor(fogRed, fogGreen, fogBlue, 0.0F);
     }

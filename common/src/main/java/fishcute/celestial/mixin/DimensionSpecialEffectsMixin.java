@@ -12,10 +12,10 @@ public class DimensionSpecialEffectsMixin {
 
     @Inject(method = "getCloudHeight", at = @At("RETURN"), cancellable = true)
     private void getCloudHeight(CallbackInfoReturnable<Float> info) {
-        VersionSky.getCloudHeight(info);
+        info.setReturnValue(VersionSky.getCloudHeight(info.getReturnValue()));
     }
     @Inject(method = "getSunriseColor", at = @At("RETURN"), cancellable = true)
     private void getFogColorOverride(float skyAngle, float tickDelta, CallbackInfoReturnable<float[]> info) {
-        VersionSky.getSunriseColor(skyAngle, tickDelta, info);
+        info.setReturnValue(new float[]{0, 0, 0, 0});
     }
 }

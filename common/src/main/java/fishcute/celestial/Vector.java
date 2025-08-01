@@ -77,7 +77,7 @@ public class Vector implements IMcVector {
         return this.blockPos;
     }
     // Putting this here to keep vec things in one file
-    public static Vec3 toVecFromArray(double[] a) {
+    public static Vec3 toVecFromArray(float[] a) {
         return new Vec3(a[0], a[1], a[2]);
     }
 }
